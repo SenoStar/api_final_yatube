@@ -9,7 +9,7 @@
 
 1. Клонировать репозиторий:
    ```bash
-   git clone <https or SSH URL>
+   git clone https://github.com/SenoStar/api_final_yatube.git
 Перейти в папку проекта:
 
 bash
