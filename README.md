@@ -30,9 +30,7 @@
    ```bash
    python api_yatube/manage.py migrate
    ```
-Запустить сервер:
-
-bash
-
-Copy
-python3 api_yatube/manage.py runserver
+6. Запустить сервер:
+   ```bash
+   python api_yatube/manage.py runserver
+   ```
