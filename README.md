@@ -20,7 +20,7 @@
    python -m venv venv
    ```
    ```bash
-   source venv/Script/activate
+   source venv/Scripts/activate
    ```
 4. Установить зависимости:
    ```bash
