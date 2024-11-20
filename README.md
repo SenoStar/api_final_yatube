@@ -34,3 +34,5 @@
    ```bash
    python api_yatube/manage.py runserver
    ```
+##Документация
+Документация API доступна по следующей ссылке: http://127.0.0.1:8000/redoc/
