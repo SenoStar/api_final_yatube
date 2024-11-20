@@ -5,42 +5,31 @@
 
 ## Установка и запуск
 
-Чтобы развернуть проект на локальной машине, выполните следующие шаги:
+Чтобы развернуть проект на локальной машине для Windows, выполните следующие шаги:
 
 1. Клонировать репозиторий:
    ```bash
    git clone https://github.com/SenoStar/api_final_yatube.git
-Перейти в папку проекта:
-
-bash
-
-Copy
-cd api_final_yatube
-Создать и активировать виртуальное окружение:
-
-bash
-
-Copy
-python3 -m venv venv
-source venv/bin/activate
-Обновить pip:
-
-bash
-
-Copy
-python3 -m pip install --upgrade pip
-Установить зависимости:
-
-bash
-
-Copy
-pip install -r requirements.txt
-Выполнить миграции:
-
-bash
-
-Copy
-python3 api_yatube/manage.py migrate
+   ```
+2. Перейти в папку проекта:
+   ```bash
+   cd api_final_yatube
+   ```
+3. Создать и активировать виртуальное окружение:
+   ```bash
+   python -m venv venv
+   ```
+   ```bash
+   source venv/Script/activate
+   ```
+4. Установить зависимости:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Выполнить миграции:
+   ```bash
+   python api_yatube/manage.py migrate
+   ```
 Запустить сервер:
 
 bash
