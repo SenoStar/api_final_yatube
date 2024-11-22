@@ -1,12 +1,11 @@
-from rest_framework import viewsets, filters
-from rest_framework.exceptions import ValidationError
+from rest_framework import viewsets, filters, mixins
 from rest_framework.generics import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import (IsAuthenticatedOrReadOnly,
                                         IsAuthenticated
                                         )
 
-from posts.models import Post, Group, Follow
+from posts.models import Post, Group
 from .serializers import (PostSerializer,
                           GroupSerializer,
                           CommentSerializer,
@@ -43,11 +42,13 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
 
 
-class FollowViewSet(viewsets.ModelViewSet):
+class FollowViewSet(mixins.CreateModelMixin,
+                    mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     serializer_class = FollowSerializer
     permission_classes = (IsAuthenticated,)
     filter_backend = (filters.SearchFilter,)
-    search_fields = ('following__username')
+    search_fields = ('following__username',)
 
     def get_queryset(self):
         queryset = self.request.user.follower.all()
@@ -58,23 +59,4 @@ class FollowViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
-        user = self.request.user
-        following_user = serializer.validated_data['following']
-
-        if user == following_user:
-            raise ValidationError(
-                {
-                    'detail':
-                    'Вы не можете подписаться на самого себя.'
-                }
-            )
-
-        if Follow.objects.filter(user=user,
-                                 following=following_user).exists():
-            raise ValidationError(
-                {
-                    'detail':
-                    'Вы уже подписаны на этого пользователя.'
-                }
-            )
-        serializer.save(user=user)
+        serializer.save(user=self.request.user)
